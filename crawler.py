@@ -42,14 +42,15 @@ def crawl_moneydigest():
             for art in articles:
                 try:
                     count+=1
-                    print 'item %s' % count
+                    print 'item %s' % count,
                     times = art.header.find('span',{'class':'posted-on'}).find_all('time')
                     publish_time = times[0].text
                     print publish_time
-                    f.write(u'publish time {}\n'.format(publish_time))
-                    pt = datetime.strptime('March 22, 2017', '%B %d, %Y')
-                    if pt < datetime(2017, 2, 1):
-                        print 'Old post, older than Feb 1, 2017'
+                    f.write(u'publish time {}\n\n'.format(publish_time))
+                    pt = datetime.strptime(publish_time, '%B %d, %Y')
+                    cutoff_time = datetime(2017, 2, 21)
+                    if pt < cutoff_time:
+                        print 'Old post, older than {}'.format(cutoff_time)
                         continue
                     header = art.header.h2
                     title = header.a.text
