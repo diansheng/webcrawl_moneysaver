@@ -1,0 +1,7 @@
+*.log
+
+result.*
+*.html
+*.pdf
+ 
+.idea
